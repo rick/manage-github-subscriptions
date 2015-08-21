@@ -1,4 +1,4 @@
-### License Checker
+### GitHub Repository Notifications Subscriptions Manager
 
 Use the [GitHub API](https://developer.github.com/v3/) to manage GitHub
 repository notification subscription lists.
