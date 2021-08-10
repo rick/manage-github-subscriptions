@@ -36,8 +36,6 @@ puts "Current octokit rate limit: #{client.rate_limit.inspect}" if debugging?
 current_names = current_subscribed_repositories client
 puts "watching [#{current_names.size}] repos"
 
-puts current_names.sort
-
 # find subscriptions to add and remove
 to_delete = current_names - allowed
 to_add = allowed - current_names
