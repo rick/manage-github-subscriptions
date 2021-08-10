@@ -11,18 +11,9 @@ end
 
 # retrieve all current subscriptions
 def current_subscribed_repositories(client)
+  client.auto_paginate = true
   puts "Retrieving current subscriptions..."
-  watched_repos = client.subscriptions
-
-  # results are paginated, collect the whole set
-  last_response = client.last_response
-  until last_response.rels[:next].nil?
-    puts "Fetched more repositories. Running total: #{watched_repos.size}"
-    last_response = last_response.rels[:next].get
-    watched_repos.concat last_response.data
-  end
-
-  watched_repos.map { |r| r[:full_name] }
+  watched_repos = client.subscriptions.map {|r| r[:full_name] }
 end
 
 # which repositories do we *want* to be subscribed to?
@@ -31,7 +22,6 @@ def desired_repositories
     line.chomp!
   end
 end
-
 
 # retrieve GitHub API token
 creds = YAML.load(File.read(File.expand_path('~/.github.yml')))
